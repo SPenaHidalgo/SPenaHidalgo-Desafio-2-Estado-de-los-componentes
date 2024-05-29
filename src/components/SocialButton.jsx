@@ -5,7 +5,9 @@ export default function SocialButton ({ button }) {
   return (
     <>
       <Button variant='outline-dark rounded-circle p-3 m-3'>
-        <i className={`fa-brands ${button} fa-xl`} />
+        <i className={`fa-brands ${button} `} />
+        <i className={`fa-brands ${button} `} />
+        <i className={`fa-brands ${button} `} />
       </Button>
     </>
   )

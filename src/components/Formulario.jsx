@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 
-function Formulario ({ addAlert }) {
+const Formulario = ({ addAlert }) => {
   const [inputs, setInputs] = useState({
     nombre: '',
     email: '',
@@ -10,25 +10,25 @@ function Formulario ({ addAlert }) {
     password2: ''
   })
 
-  function inputsHandler (e) {
-    if (e.target.id === 'nombre') {
-      setInputs({ ...inputs, nombre: e.target.value })
+  const inputEntrantes = (a) => {
+    if (a.target.id === 'nombre') {
+      setInputs({ ...inputs, nombre: a.target.value })
     }
 
-    if (e.target.id === 'email') {
-      setInputs({ ...inputs, email: e.target.value })
+    if (a.target.id === 'email') {
+      setInputs({ ...inputs, email: a.target.value })
     }
 
-    if (e.target.id === 'password1') {
-      setInputs({ ...inputs, password1: e.target.value })
+    if (a.target.id === 'password1') {
+      setInputs({ ...inputs, password1: a.target.value })
     }
-    if (e.target.id === 'password2') {
-      setInputs({ ...inputs, password2: e.target.value })
+    if (a.target.id === 'password2') {
+      setInputs({ ...inputs, password2: a.target.value })
     }
   }
 
-  function validacionInputs (e) {
-    e.preventDefault()
+  const validadorInputs = (a) => {
+    a.preventDefault()
 
     const isValidNombre = /^[a-zA-Z0-9]{3,}$/
     const isValidEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
@@ -39,27 +39,27 @@ function Formulario ({ addAlert }) {
       ? { texto: 'Por favor, completa todos los campos', tipo: 'alert-danger', estado: true }
       : !isValidNombre.test(inputs.nombre)
 
-          ? { texto: 'El Nombre debe tener un mínimo de 3 caracteres. No se permiten caracteres especiales!', tipo: 'alert-danger', estado: true }
+          ? { texto: 'El Nombre debe tener un mínimo de 3 caracteres. No se permiten caracteres especiales.', tipo: 'alert-danger', estado: true }
           : !isValidEmail.test(inputs.email)
 
-              ? { texto: 'Formato de email incorrecto!', tipo: 'alert-danger', estado: true }
+              ? { texto: 'Formato de email incorrecto', tipo: 'alert-danger', estado: true }
               : !isValidPassword.test(inputs.password1)
 
-                  ? { texto: 'La contraseña debe tener mínimo 6 caracteres, una letra mayúscula, una letra minúscula y un número!', tipo: 'alert-danger', estado: true }
+                  ? { texto: 'La contraseña debe tener mínimo 6 caracteres, una letra mayúscula, una letra minúscula y un número', tipo: 'alert-danger', estado: true }
                   : inputs.password1 !== inputs.password2
 
-                    ? { texto: 'Ambas contraseñas deben ser iguales!', tipo: 'alert-danger', estado: true }
-                    : { texto: 'Registro creado exitosamente!', tipo: 'alert-success', estado: true }
+                    ? { texto: 'Las contraseñas no coinciden. Intenta otra vez', tipo: 'alert-danger', estado: true }
+                    : { texto: '¡Cuenta creada con éxito!', tipo: 'alert-success', estado: true }
 
     addAlert(alert)
   }
 
   return (
     <>
-      <Form onSubmit={(e) => validacionInputs(e)}>
+      <Form onSubmit={(a) => validadorInputs(a)}>
         <Form.Group className='mb-3'>
           <Form.Control
-            onChange={(e) => inputsHandler(e)}
+            onChange={(a) => inputEntrantes(a)}
             id='nombre'
             name='Nombre'
             type='text'
@@ -69,7 +69,7 @@ function Formulario ({ addAlert }) {
 
         <Form.Group className='mb-3'>
           <Form.Control
-            onChange={(e) => inputsHandler(e)}
+            onChange={(a) => inputEntrantes(a)}
             id='email'
             name='Email'
             type='email'
@@ -79,7 +79,7 @@ function Formulario ({ addAlert }) {
 
         <Form.Group className='mb-3'>
           <Form.Control
-            onChange={(e) => inputsHandler(e)}
+            onChange={(a) => inputEntrantes(a)}
             id='password1'
             name='password1'
             type='password'
@@ -89,7 +89,7 @@ function Formulario ({ addAlert }) {
 
         <Form.Group className='mb-3'>
           <Form.Control
-            onChange={(e) => inputsHandler(e)}
+            onChange={(a) => inputEntrantes(a)}
             id='password2'
             name='password2'
             type='password'
